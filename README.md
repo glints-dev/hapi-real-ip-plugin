@@ -1,4 +1,4 @@
-# real-ip-plugin [![npm version](https://badge.fury.io/js/%40glints%2Fhapi-real-ip-plugin.svg)](https://badge.fury.io/js/%40glints%2Fhapi-real-ip-plugin)
+# real-ip-plugin [![npm version](https://badge.fury.io/js/%40glints%2Fhapi-real-ip-plugin.svg)](https://badge.fury.io/js/%40glints%2Fhapi-real-ip-plugin) [![Greenkeeper badge](https://badges.greenkeeper.io/glints-dev/hapi-real-ip-plugin.svg)](https://greenkeeper.io/)
 
 This plugin resolves client's IP address from the `X-Forwarded-For` header if
 any downstream proxies are present. The resolved addresses are stored in
