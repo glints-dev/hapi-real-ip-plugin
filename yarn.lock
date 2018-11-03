@@ -359,9 +359,9 @@ growl@1.10.5:
   version "1.10.5"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.5.tgz#f2735dc2283674fa67478b10181059355c369e5e"
 
-hapi@^17.5.4:
-  version "17.5.4"
-  resolved "https://registry.yarnpkg.com/hapi/-/hapi-17.5.4.tgz#f3c1070f9ee398d9c6ad8ebc5abf180f13914f3c"
+hapi@^17.6.3:
+  version "17.6.3"
+  resolved "https://registry.yarnpkg.com/hapi/-/hapi-17.6.3.tgz#d22a168e2b209924ab6c297367910fc9ba2803ba"
   dependencies:
     accept "3.x.x"
     ammo "3.x.x"
@@ -371,8 +371,8 @@ hapi@^17.5.4:
     catbox "10.x.x"
     catbox-memory "3.x.x"
     heavy "6.x.x"
-    hoek "5.x.x"
-    joi "13.x.x"
+    hoek "6.x.x"
+    joi "14.x.x"
     mimos "4.x.x"
     podium "3.x.x"
     shot "4.x.x"
@@ -406,6 +406,10 @@ heavy@6.x.x:
 hoek@5.x.x:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-5.0.4.tgz#0f7fa270a1cafeb364a4b2ddfaa33f864e4157da"
+
+hoek@6.x.x:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-6.0.1.tgz#15ae90f8d30ad114e2feabe4967567014a783078"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -441,6 +445,14 @@ joi@13.x.x:
   resolved "https://registry.yarnpkg.com/joi/-/joi-13.6.0.tgz#877d820e3ad688a49c32421ffefc746bfbe2d0a0"
   dependencies:
     hoek "5.x.x"
+    isemail "3.x.x"
+    topo "3.x.x"
+
+joi@14.x.x:
+  version "14.0.4"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-14.0.4.tgz#f066f79330f6bd6f3dda243be6d2c211f83a5f9b"
+  dependencies:
+    hoek "6.x.x"
     isemail "3.x.x"
     topo "3.x.x"
 
