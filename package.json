@@ -14,6 +14,9 @@
     "tslint": "tslint --project .",
     "test": "mocha --require ts-node/register/type-check --recursive \"src/**/*.spec.ts\""
   },
+  "engines": {
+    "node": ">= 10"
+  },
   "devDependencies": {
     "@glints/tslint-rules": "^1.0.6",
     "@types/chai": "^4.2.4",
