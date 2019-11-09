@@ -1,6 +1,6 @@
 {
   "name": "@glints/hapi-real-ip-plugin",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A plugin that attempts to determine the real IP of the client.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
