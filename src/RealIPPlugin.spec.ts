@@ -9,7 +9,7 @@ import RealIPPlugin from './RealIPPlugin';
 
 describe('RealIPPlugin', () => {
   let server: Hapi.Server;
-  let spy: Sinon.SinonSpy;
+  let spy: Sinon.SinonSpy<[any, Hapi.ResponseToolkit]>;
 
   before(() => {
     spy = Sinon.spy((request: any, h: Hapi.ResponseToolkit) => h.continue);
