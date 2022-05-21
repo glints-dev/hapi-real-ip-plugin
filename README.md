@@ -2,7 +2,7 @@
 
 This plugin resolves client's IP address from the `X-Forwarded-For` header if
 any downstream proxies are present. The resolved addresses are stored in
-`request.info.remoteAddress`.
+`request.plugins.RealIPPlugin.ip`.
 
 # Usage Instructions
 

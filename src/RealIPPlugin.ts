@@ -4,10 +4,24 @@ export interface RealIPPluginOptions {
   numProxies: number;
 }
 
+export interface RealIPPluginState {
+  ip?: string;
+}
+
+declare module '@hapi/hapi' {
+  interface PluginsStates {
+    RealIPPlugin: RealIPPluginState;
+  }
+}
+
 const RealIPPlugin: Hapi.Plugin<RealIPPluginOptions> & Hapi.PluginNameVersion = {
   name: 'RealIPPlugin',
   register: async (server, options) => {
     server.ext('onRequest', async (request, h) => {
+      request.plugins.RealIPPlugin = {
+        ip: request.info.remoteAddress,
+      };
+
       const xffHeader = request.headers['x-forwarded-for'];
       if (!xffHeader) {
         return h.continue;
@@ -20,7 +34,7 @@ const RealIPPlugin: Hapi.Plugin<RealIPPluginOptions> & Hapi.PluginNameVersion = 
       // X-Forwarded-For can be spoofed, so be sure to compare with the expected
       // number of proxies.
       if (downstreamNodes.length === options.numProxies) {
-        request.info.remoteAddress = downstreamNodes[0];
+        request.plugins.RealIPPlugin.ip = downstreamNodes[0];
       }
 
       return h.continue;

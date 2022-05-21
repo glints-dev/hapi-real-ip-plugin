@@ -42,7 +42,7 @@ describe('RealIPPlugin', () => {
       });
 
       const request = spy.args[0][0] as Hapi.Request;
-      assert.strictEqual(request.info.remoteAddress, '1.2.3.4');
+      assert.strictEqual(request.plugins.RealIPPlugin.ip, '1.2.3.4');
     });
 
     it('should set request.info.remoteAddress with X-Forwarded-For header', async () => {
@@ -62,7 +62,7 @@ describe('RealIPPlugin', () => {
       });
 
       const request = spy.args[0][0] as Hapi.Request;
-      assert.strictEqual(request.info.remoteAddress, '2.3.4.5');
+      assert.strictEqual(request.plugins.RealIPPlugin.ip, '2.3.4.5');
     });
 
     it('should handle multiple headers', async () => {
@@ -82,7 +82,7 @@ describe('RealIPPlugin', () => {
       });
 
       const request = spy.args[0][0] as Hapi.Request;
-      assert.strictEqual(request.info.remoteAddress, '3.4.5.6');
+      assert.strictEqual(request.plugins.RealIPPlugin.ip, '3.4.5.6');
     });
   });
 });
