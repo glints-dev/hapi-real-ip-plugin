@@ -9,6 +9,10 @@ export interface RealIPPluginState {
 }
 
 declare module '@hapi/hapi' {
+  interface PluginsListRegistered {
+    RealIPPlugin: PluginRegistered;
+  }
+
   interface PluginsStates {
     RealIPPlugin: RealIPPluginState;
   }

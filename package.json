@@ -11,24 +11,25 @@
   "scripts": {
     "build": "tsc --declaration",
     "clean": "rm -r dist/",
-    "tslint": "tslint --project .",
+    "eslint": "eslint .",
     "test": "mocha --require ts-node/register/type-check --recursive \"src/**/*.spec.ts\""
   },
   "engines": {
     "node": ">= 12"
   },
   "devDependencies": {
-    "@glints/tslint-rules": "^1.0.6",
     "@hapi/hapi": "^20.2.2",
     "@types/chai": "^4.2.4",
     "@types/hapi__hapi": "^20.0.10",
     "@types/mocha": "^5.2.7",
     "@types/sinon": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
     "chai": "^4.2.0",
+    "eslint": "^8.16.0",
     "mocha": "^6.2.2",
     "sinon": "^7.5.0",
     "ts-node": "^8.4.1",
-    "tslint": "^5.20.1",
     "typescript": "^3.7.2"
   },
   "peerDependencies": {},

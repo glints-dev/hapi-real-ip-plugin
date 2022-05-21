@@ -9,10 +9,10 @@ import RealIPPlugin from './RealIPPlugin';
 
 describe('RealIPPlugin', () => {
   let server: Hapi.Server;
-  let spy: Sinon.SinonSpy<[any, Hapi.ResponseToolkit]>;
+  let spy: Sinon.SinonSpy<[Hapi.Request, Hapi.ResponseToolkit]>;
 
   before(() => {
-    spy = Sinon.spy((request: any, h: Hapi.ResponseToolkit) => h.continue);
+    spy = Sinon.spy((request: Hapi.Request, h: Hapi.ResponseToolkit) => h.continue);
   });
 
   beforeEach(() => {
@@ -30,7 +30,7 @@ describe('RealIPPlugin', () => {
 
   it('should be registered', async () => {
     await server.register({ plugin: RealIPPlugin });
-    assert.exists((server.registrations as any)[RealIPPlugin.name]);
+    assert.exists(server.registrations.RealIPPlugin);
   });
 
   describe('Plugin Functionality', () => {
@@ -41,7 +41,7 @@ describe('RealIPPlugin', () => {
         remoteAddress: '1.2.3.4',
       });
 
-      const request = spy.args[0][0] as Hapi.Request;
+      const request = spy.args[0][0];
       assert.strictEqual(request.plugins.RealIPPlugin.ip, '1.2.3.4');
     });
 
@@ -61,7 +61,7 @@ describe('RealIPPlugin', () => {
         },
       });
 
-      const request = spy.args[0][0] as Hapi.Request;
+      const request = spy.args[0][0];
       assert.strictEqual(request.plugins.RealIPPlugin.ip, '2.3.4.5');
     });
 
@@ -81,7 +81,7 @@ describe('RealIPPlugin', () => {
         },
       });
 
-      const request = spy.args[0][0] as Hapi.Request;
+      const request = spy.args[0][0];
       assert.strictEqual(request.plugins.RealIPPlugin.ip, '3.4.5.6');
     });
   });
