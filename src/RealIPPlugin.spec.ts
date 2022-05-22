@@ -33,7 +33,7 @@ describe("RealIPPlugin", () => {
       });
 
       const request = spy.mock.calls[0][0];
-      expect(request.plugins.RealIPPlugin.ip).toStrictEqual("1.2.3.4");
+      expect(request.plugins.RealIPPlugin?.ip).toStrictEqual("1.2.3.4");
     });
 
     it("should set request.info.remoteAddress with X-Forwarded-For header", async () => {
@@ -53,7 +53,7 @@ describe("RealIPPlugin", () => {
       });
 
       const request = spy.mock.calls[0][0];
-      expect(request.plugins.RealIPPlugin.ip).toStrictEqual("2.3.4.5");
+      expect(request.plugins.RealIPPlugin?.ip).toStrictEqual("2.3.4.5");
     });
 
     it("should handle multiple headers", async () => {
@@ -73,7 +73,7 @@ describe("RealIPPlugin", () => {
       });
 
       const request = spy.mock.calls[0][0];
-      expect(request.plugins.RealIPPlugin.ip).toStrictEqual("3.4.5.6");
+      expect(request.plugins.RealIPPlugin?.ip).toStrictEqual("3.4.5.6");
     });
   });
 });
