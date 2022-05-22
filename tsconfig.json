@@ -11,5 +11,5 @@
     "strict": true,
     "target": "es2018"
   },
-  "exclude": ["**/*.spec.ts"]
+  "exclude": ["dist/**", "**/*.spec.ts"]
 }
