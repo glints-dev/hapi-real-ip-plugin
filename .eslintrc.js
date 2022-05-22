@@ -4,25 +4,21 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  ignorePatterns: ['dist/**'],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  ignorePatterns: ["dist/**"],
   overrides: [
     {
-      files: ['*.spec.ts'],
+      files: ["*.spec.ts"],
       env: {
-        mocha: true,
+        "jest/globals": true,
       },
+      extends: ["plugin:jest/recommended"],
     },
   ],
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
+  plugins: ["@typescript-eslint", "jest"],
   root: true,
 };

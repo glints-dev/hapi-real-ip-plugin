@@ -1,51 +1,42 @@
-import 'mocha';
+import * as Hapi from "@hapi/hapi";
 
-import { assert } from 'chai';
-import * as Sinon from 'sinon';
+import RealIPPlugin from "./RealIPPlugin";
 
-import * as Hapi from '@hapi/hapi';
-
-import RealIPPlugin from './RealIPPlugin';
-
-describe('RealIPPlugin', () => {
+describe("RealIPPlugin", () => {
   let server: Hapi.Server;
-  let spy: Sinon.SinonSpy<[Hapi.Request, Hapi.ResponseToolkit]>;
-
-  before(() => {
-    spy = Sinon.spy((request: Hapi.Request, h: Hapi.ResponseToolkit) => h.continue);
-  });
+  let spy: jest.Mock<symbol, [Hapi.Request, Hapi.ResponseToolkit]>;
 
   beforeEach(() => {
+    spy = jest.fn(
+      (request: Hapi.Request, h: Hapi.ResponseToolkit) => h.continue
+    );
+
     server = new Hapi.Server();
     server.route({
-      method: '*',
-      path: '/{p*}',
+      method: "*",
+      path: "/{p*}",
       handler: spy,
     });
   });
 
-  afterEach(() => {
-    spy.resetHistory();
-  });
-
-  it('should be registered', async () => {
+  it("should be registered", async () => {
     await server.register({ plugin: RealIPPlugin });
-    assert.exists(server.registrations.RealIPPlugin);
+    expect(server.registrations.RealIPPlugin).toBeTruthy();
   });
 
-  describe('Plugin Functionality', () => {
-    it('should pass address as-is without X-Forwarded-For header', async () => {
+  describe("Plugin Functionality", () => {
+    it("should pass address as-is without X-Forwarded-For header", async () => {
       await server.register({ plugin: RealIPPlugin });
       await server.inject({
-        url: '/',
-        remoteAddress: '1.2.3.4',
+        url: "/",
+        remoteAddress: "1.2.3.4",
       });
 
-      const request = spy.args[0][0];
-      assert.strictEqual(request.plugins.RealIPPlugin.ip, '1.2.3.4');
+      const request = spy.mock.calls[0][0];
+      expect(request.plugins.RealIPPlugin.ip).toStrictEqual("1.2.3.4");
     });
 
-    it('should set request.info.remoteAddress with X-Forwarded-For header', async () => {
+    it("should set request.info.remoteAddress with X-Forwarded-For header", async () => {
       await server.register({
         plugin: RealIPPlugin,
         options: {
@@ -54,18 +45,18 @@ describe('RealIPPlugin', () => {
       });
 
       await server.inject({
-        url: '/',
-        remoteAddress: '1.2.3.4',
+        url: "/",
+        remoteAddress: "1.2.3.4",
         headers: {
-          'X-Forwarded-For': '2.3.4.5',
+          "X-Forwarded-For": "2.3.4.5",
         },
       });
 
-      const request = spy.args[0][0];
-      assert.strictEqual(request.plugins.RealIPPlugin.ip, '2.3.4.5');
+      const request = spy.mock.calls[0][0];
+      expect(request.plugins.RealIPPlugin.ip).toStrictEqual("2.3.4.5");
     });
 
-    it('should handle multiple headers', async () => {
+    it("should handle multiple headers", async () => {
       await server.register({
         plugin: RealIPPlugin,
         options: {
@@ -74,15 +65,15 @@ describe('RealIPPlugin', () => {
       });
 
       await server.inject({
-        url: '/',
-        remoteAddress: '1.2.3.4',
+        url: "/",
+        remoteAddress: "1.2.3.4",
         headers: {
-          'X-Forwarded-For': '3.4.5.6, 4.5.6.7',
+          "X-Forwarded-For": "3.4.5.6, 4.5.6.7",
         },
       });
 
-      const request = spy.args[0][0];
-      assert.strictEqual(request.plugins.RealIPPlugin.ip, '3.4.5.6');
+      const request = spy.mock.calls[0][0];
+      expect(request.plugins.RealIPPlugin.ip).toStrictEqual("3.4.5.6");
     });
   });
 });
